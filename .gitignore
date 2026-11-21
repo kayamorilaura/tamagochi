@@ -1,0 +1,25 @@
+# Academic documents and private working files
+/relatório/
+/relatorio/
+/reports/
+*.docx
+*.odt
+*.pdf
+
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Generated runs and local model weights
+runs/
+*.pt

@@ -2,9 +2,11 @@
 /relatório/
 /relatorio/
 /reports/
+/evidencias/
 *.docx
 *.odt
 *.pdf
+*.png
 
 # Python cache and virtual environments
 __pycache__/

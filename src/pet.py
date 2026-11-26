@@ -368,7 +368,13 @@ class Mametchi:
     # ATUALIZAR O PERSONAGEM
     # ======================================
 
-    def update(self, frame_w, frame_h, rosto_x=None):
+    def update(
+    self,
+    frame_w,
+    frame_h,
+    rosto_x=None,
+    espaco_menu=0
+):
         """
         Método principal do comportamento.
 
@@ -442,7 +448,15 @@ class Mametchi:
 
 
         # Manter o personagem na parte inferior
-        self.y = frame_h - self.sprite_atual.shape[0] - MARGEM
+        # Descontar o espaço ocupado pelo menu
+        # para o Mametchi caminhar sempre acima dele.
+
+        self.y = (
+            frame_h
+            - self.sprite_atual.shape[0]
+            - MARGEM
+            - espaco_menu
+        )
 
 
     # ======================================

@@ -65,3 +65,32 @@ SPRITE_DIREITA = "mametchi_04.png"
 
 SPRITE_IDLE = "mametchi_05.png"
 SPRITE_FELIZ = "mametchi_08.png"
+
+
+# ==========================================
+# CONFIGURAÇÕES DO MENU
+# ==========================================
+
+MENU_DIR = BASE_DIR / "art" / "sprites" / "menu_processado"
+
+# Altura da barra inferior
+MENU_HEIGHT = 120
+
+# Margem interna dos botões
+MENU_PADDING = 10
+
+# Tamanho máximo dos ícones
+MENU_ICON_SIZE = 65
+
+# Cores em formato BGR (OpenCV)
+MENU_BACKGROUND = (235, 235, 235)
+MENU_BUTTON_COLOR = (255, 255, 255)
+MENU_SELECTED_COLOR = (180, 215, 180)
+MENU_BORDER_COLOR = (30, 30, 30)
+
+# Associar cada opção à respetiva imagem
+MENU_ICONS = {
+    "FEED": "Ícone pixelado de garfo e faca-3.png",
+    "CLEAN": "Pato de borracha em pixel art.png",
+    "PLAY": "Ícone Pixelado de Beisebol e Taco.png"
+}

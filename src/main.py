@@ -2,10 +2,8 @@
 """
 MAIN.PY
 
-Tamagotchi Interativo
-
-Responsável apenas pela coordenação
-dos diferentes módulos da aplicação.
+Responsável pela coordenação dos módulos
+do Tamagotchi Interativo.
 """
 
 import cv2
@@ -20,20 +18,23 @@ from camera import Camera
 from pet import Mametchi
 from face_detection import FaceDetector
 from renderer import draw_label
+from menu import Menu
 
 
 def main():
 
-    # Inicializar os componentes
+    # Inicializar os componentes da aplicação
     mametchi = Mametchi()
     detector = FaceDetector()
+    menu = Menu()
     camera = Camera()
 
     try:
 
         while True:
 
-            # 1. Capturar a imagem da webcam
+            # 1. CAPTURAR A WEBCAM
+
             frame = camera.read()
 
             if frame is None:
@@ -42,7 +43,8 @@ def main():
             frame_h, frame_w = frame.shape[:2]
 
 
-            # 2. Detetar o rosto do utilizador
+            # 2. DETETAR O UTILIZADOR
+
             rosto = detector.detect(frame)
 
             centro = detector.get_center(rosto)
@@ -54,42 +56,65 @@ def main():
             )
 
 
-            # 3. Atualizar o comportamento do Mametchi
+            # 3. ATUALIZAR O MAMETCHI
+
             mametchi.update(
                 frame_w,
                 frame_h,
-                rosto_x
+                rosto_x,
+                espaco_menu=menu.altura_ocupada()
             )
 
 
-            # 4. Desenhar a deteção facial (debug)
-            if DEBUG_FACE:
+            # 4. MOSTRAR A DETEÇÃO FACIAL
 
+            if DEBUG_FACE:
                 detector.draw(frame, rosto)
 
 
-            # 5. Desenhar o Mametchi
+            # 5. DESENHAR A INTERFACE
+
             frame = mametchi.draw(frame)
 
+            frame = menu.draw(frame)
 
-            # 6. Apresentar o estado atual
             draw_label(
                 frame,
                 f"Mametchi: {mametchi.estado}"
             )
 
 
-            # 7. Apresentar a imagem final
+            # 6. APRESENTAR A IMAGEM FINAL
+
             cv2.imshow(WINDOW_NAME, frame)
 
 
-            # 8. Pressionar Q para sair
-            if cv2.waitKey(1) & 0xFF == ord("q"):
+            # 7. INTERAÇÕES TEMPORÁRIAS POR TECLADO
+
+            key = cv2.waitKey(1) & 0xFF
+
+            # Encerrar a aplicação
+            if key == ord("q"):
                 break
+
+            # Abrir ou fechar o menu
+            elif key == ord("m"):
+                menu.toggle()
+
+            # Selecionar FEED
+            elif key == ord("1"):
+                menu.selecionar("FEED")
+
+            # Selecionar CLEAN
+            elif key == ord("2"):
+                menu.selecionar("CLEAN")
+
+            # Selecionar PLAY
+            elif key == ord("3"):
+                menu.selecionar("PLAY")
 
     finally:
 
-        # Libertar os recursos mesmo que ocorra um erro
         camera.release()
 
         cv2.destroyAllWindows()

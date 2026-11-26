@@ -15,6 +15,8 @@ Conceitos para estudar:
 """
 
 import time
+from log import log_necessidades
+from config import INTERVALO_LOG_NECESSIDADES
 
 from config import (
     SPRITES_DIR,
@@ -33,7 +35,13 @@ from config import (
     DURACAO_FELICIDADE,
     TEMPO_PERDER_ROSTO,
     INTERVALO_PISCAR,
-    DURACAO_PISCAR
+    DURACAO_PISCAR,
+    MODO_DEMONSTRACAO,
+    DURACAO_NECESSIDADES_HORAS,
+    DURACAO_DEMONSTRACAO_SEGUNDOS,
+    TAXA_SACIEDADE,
+    TAXA_HIGIENE,
+    TAXA_FELICIDADE,
 )
 
 from renderer import (
@@ -67,18 +75,23 @@ class Mametchi:
         # ESTADOS DO PERSONAGEM
 
         self.estado = "WANDERING"
-
         self.virar_ate = 0
         self.feliz_ate = 0
-
         self.chegou = False
 
+        # NECESSIDADES DO PERSONAGEM
+
+        self.saciedade = 100
+        self.higiene = 100
+        self.felicidade = 100
 
         # TEMPORIZADORES
 
         agora = time.monotonic()
 
         self.tempo_anterior = agora
+        self.ultimo_log_necessidades = agora
+        self.ultima_atualizacao_necessidades = agora
         self.last_switch = agora
         self.inicio_idle = agora
 
@@ -362,7 +375,32 @@ class Mametchi:
             else:
 
                 self.sprite_atual = self.sprites_caminhada[0]
+    # ======================================
+    # NECESSIDADES DO PERSONAGEM
+    # ======================================
 
+    def atualizar_necessidades(self, dt):
+
+        # Escolher entre tempo real e demonstração
+        if MODO_DEMONSTRACAO:
+            duracao = DURACAO_DEMONSTRACAO_SEGUNDOS
+        else:
+            duracao = DURACAO_NECESSIDADES_HORAS * 3600
+
+        # Calcular a diminuição proporcional ao tempo
+        perda = (100 / duracao) * dt
+
+        self.saciedade = max(
+            0, self.saciedade - perda * TAXA_SACIEDADE
+        )
+
+        self.higiene = max(
+            0, self.higiene - perda * TAXA_HIGIENE
+        )
+
+        self.felicidade = max(
+            0, self.felicidade - perda * TAXA_FELICIDADE
+        )
 
     # ======================================
     # ATUALIZAR O PERSONAGEM
@@ -399,6 +437,19 @@ class Mametchi:
         dt = min(dt, 0.1)
 
         self.tempo_anterior = agora
+
+        self.atualizar_necessidades(dt)
+        # REGISTAR NECESSIDADES PERIODICAMENTE
+
+        if agora - self.ultimo_log_necessidades >= INTERVALO_LOG_NECESSIDADES:
+
+            log_necessidades(
+                self.saciedade,
+                self.higiene,
+                self.felicidade
+            )
+
+            self.ultimo_log_necessidades = agora
 
 
         # LIMITES DO ECRÃ

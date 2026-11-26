@@ -94,3 +94,27 @@ MENU_ICONS = {
     "CLEAN": "Pato de borracha em pixel art.png",
     "PLAY": "Ícone Pixelado de Beisebol e Taco.png"
 }
+
+# ==========================================
+# CONFIGURAÇÕES DAS NECESSIDADES
+# ==========================================
+
+# !!! ALTERAR PARA TRUE DURANTE A APRESENTAÇÃO !!!
+MODO_DEMONSTRACAO = False
+
+# Duração padrão configurável pelo utilizador
+DURACAO_NECESSIDADES_HORAS = 14
+
+# Duração acelerada para apresentar ao professor
+DURACAO_DEMONSTRACAO_SEGUNDOS = 60
+
+# Velocidade relativa de diminuição
+TAXA_SACIEDADE = 1.0
+TAXA_HIGIENE = 0.7
+TAXA_FELICIDADE = 0.5
+
+# ==========================================
+# CONFIGURAÇÕES DOS LOGS
+# ==========================================
+
+INTERVALO_LOG_NECESSIDADES = 5

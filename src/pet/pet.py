@@ -15,7 +15,7 @@ Conceitos para estudar:
 """
 
 import time
-from log import log_necessidades
+from utils.log import log_necessidades
 from config import INTERVALO_LOG_NECESSIDADES
 
 from config import (
@@ -44,7 +44,7 @@ from config import (
     TAXA_FELICIDADE,
 )
 
-from renderer import (
+from interface.renderer import (
     load_sprite,
     resize_sprite,
     overlay_rgba

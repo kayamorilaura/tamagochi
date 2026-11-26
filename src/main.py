@@ -14,11 +14,11 @@ from config import (
     SEGUIR_UTILIZADOR
 )
 
-from camera import Camera
-from pet import Mametchi
-from face_detection import FaceDetector
-from renderer import draw_label
-from menu import Menu
+from vision.camera import Camera
+from pet.pet import Mametchi
+from vision.face_detection import FaceDetector
+from interface.renderer import draw_label
+from interface.menu import Menu
 
 
 def main():

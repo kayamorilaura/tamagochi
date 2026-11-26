@@ -26,7 +26,7 @@ from config import (
     MENU_ICONS
 )
 
-from renderer import load_sprite, overlay_rgba
+from interface.renderer import load_sprite, overlay_rgba
 
 
 class Menu:

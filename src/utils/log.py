@@ -30,3 +30,11 @@ def log_necessidades(saciedade, higiene, felicidade):
         f"Higiene: {higiene:.2f}% | "
         f"Felicidade: {felicidade:.2f}%"
     )
+
+# ======================================
+# RECONHECIMENTO DE GESTOS
+# ======================================
+
+def log_gesto(gesto):
+
+    logger.debug(f"Gesto reconhecido: {gesto}")

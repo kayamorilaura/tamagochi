@@ -98,6 +98,18 @@ class Menu:
     # VISIBILIDADE DO MENU
     # ======================================
 
+    def abrir(self):
+        if not self.visivel:
+            self.visivel = True
+
+
+    def fechar(self):
+
+        if self.visivel:
+            self.visivel = False
+            self.selecionado = None
+            self.botoes.clear()
+
     def toggle(self):
         """
         Alterna entre aberto e fechado.
@@ -122,6 +134,8 @@ class Menu:
             return MENU_HEIGHT
 
         return 0
+
+    
 
 
     # ======================================

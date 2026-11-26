@@ -118,3 +118,18 @@ TAXA_FELICIDADE = 0.5
 # ==========================================
 
 INTERVALO_LOG_NECESSIDADES = 5
+
+# ==========================================
+# DETEÇÃO DAS MÃOS
+# ==========================================
+
+MODELS_DIR = BASE_DIR / "models"
+
+HAND_MODEL_PATH = MODELS_DIR / "hand_landmarker.task"
+
+DEBUG_HAND = True
+
+MAX_HANDS = 1
+
+HAND_DETECTION_CONFIDENCE = 0.6
+HAND_TRACKING_CONFIDENCE = 0.6
